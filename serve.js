@@ -5,10 +5,11 @@ const os = require('os')
 async function requestHandler(req, res) {
   const startUsage = process.cpuUsage()
   await simIO(50)
-  simCPU(20)
+  simCPU(21)
   const cpuUsage = process.cpuUsage(startUsage).user
   console.log(`${req.url} | ${bytesToSize(process.memoryUsage().heapUsed)} | ${os.uptime()}s `)
   res.setHeader("Content-Type", "text/html")
+  res.write('<h1 style="color:red">Version 1</h1>')
   res.end(`<h2>Hello from Node.js on ${os.hostname()}, cpu usage: ${cpuUsage}, memory usage: ${bytesToSize(process.memoryUsage().heapUsed)}, uptime: ${os.uptime()} seconds</h2>\n`)
 }
 
