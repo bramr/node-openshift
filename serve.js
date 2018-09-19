@@ -18,6 +18,7 @@ server.listen(port, (err) => {
     return console.log('Whoops something went wrong :()', err)
   }
   console.log(`Node server is listening on ${port}`)
+  console.log(`pid is ${process.pid}`)
 })
 
 const bytesToSize = (bytes) => {
@@ -38,3 +39,8 @@ const simIO = (ms) => {
   })
 }
 
+process.on('SIGTERM', function() {
+  server.close(function () {
+    process.exit(0);
+  });
+});
